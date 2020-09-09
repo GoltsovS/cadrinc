@@ -2,9 +2,10 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import IControllerBase from "../interfaces/IControllerBase.interface";
 import path from 'path';
+const paths = require('../../vars/paths');
 
 class HomeController implements IControllerBase {
-    public path = '*';
+    public path = '/';
 
     public router = express.Router();
 
@@ -17,8 +18,7 @@ class HomeController implements IControllerBase {
     }
 
     index = (req: Request, res: Response) => {
-        // res.json({ 'message': `hello, i'm home controller`});
-        res.sendFile(path.join(`${__dirname}/dist/client/index.html`));
+        res.sendFile(path.join(paths.DIST.CLIENT, 'index.html'));
     }
 }
 

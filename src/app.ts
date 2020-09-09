@@ -1,5 +1,6 @@
 import express from 'express';
 import { Application } from 'express';
+const paths = require('../vars/paths');
 
 class App {
     public app: Application;
@@ -12,12 +13,17 @@ class App {
 
         this.middlewares(appInit.middlewares);
         this.routes(appInit.controllers);
+        this.assets();
     }
 
     private routes(controllers: { forEach: (arg0: (controller: any) => void) => void; }) {
         controllers.forEach(controller => {
             this.app.use('/', controller.router);
         });
+    }
+
+    private assets() {
+        this.app.use(express.static(paths.DIST.CLIENT));
     }
 
     private middlewares(middleWares: { forEach: (arg0: (middleWare: any) => void) => void; }) {
