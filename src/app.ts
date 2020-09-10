@@ -1,6 +1,6 @@
 import express from 'express';
 import { Application } from 'express';
-const paths = require('../vars/paths');
+const { DIST } = require('../vars/paths');
 
 class App {
     public app: Application;
@@ -23,7 +23,7 @@ class App {
     }
 
     private assets() {
-        this.app.use(express.static(paths.DIST.CLIENT));
+        this.app.use(express.static(DIST.CLIENT));
     }
 
     private middlewares(middleWares: { forEach: (arg0: (middleWare: any) => void) => void; }) {

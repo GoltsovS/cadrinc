@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import IControllerBase from "../interfaces/IControllerBase.interface";
 import path from 'path';
-const paths = require('../../vars/paths');
+const { DIST } = require('../../vars/paths');
 
 class HomeController implements IControllerBase {
     public path = '/';
@@ -18,7 +18,7 @@ class HomeController implements IControllerBase {
     }
 
     index = (req: Request, res: Response) => {
-        res.sendFile(path.join(paths.DIST.CLIENT, 'index.html'));
+        res.sendFile(path.join(DIST.CLIENT, 'index.html'));
     }
 }
 

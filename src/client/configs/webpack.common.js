@@ -1,13 +1,13 @@
 const path = require('path');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
-const { ROOT } = require('../../../vars/paths');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { ROOT, SRC } = require('../../../vars/paths');
 
 module.exports = {
     entry: './src/client/index.tsx',
     output: {
         path: path.join(ROOT, 'dist', 'client'),
-        filename: 'build.js',
+        filename: '[name]-[hash].js',
     },
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
@@ -27,13 +27,8 @@ module.exports = {
     },
     plugins: [
         new CleanWebpackPlugin(),
-        new CopyWebpackPlugin({
-            patterns: [
-                {
-                    from: path.join(ROOT, 'src', 'client', 'index.html'),
-                    to: path.join(ROOT, 'dist', 'client')
-                },
-            ]
-        }),
+        new HtmlWebpackPlugin({
+            template: path.join(SRC.CLIENT, 'index.html'),
+        })
     ],
 };
