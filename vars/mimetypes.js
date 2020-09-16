@@ -1,0 +1,1 @@
+module.exports = ['video/mp4', 'video/x-flv', 'video/mpeg'];

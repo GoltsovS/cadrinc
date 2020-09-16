@@ -4,6 +4,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ROOT, SRC } = require('../../../vars/paths');
 
 module.exports = {
+    mode: 'production',
     entry: './src/client/index.tsx',
     output: {
         path: path.join(ROOT, 'dist', 'client'),

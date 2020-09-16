@@ -4,6 +4,7 @@ const path = require('path');
 const { ROOT } = require('../../../vars/paths');
 
 module.exports = merge(common, {
+    mode: 'development',
     devtool: 'inline-source-map',
     devServer: {
         contentBase: path.join(ROOT, 'dist', 'client'),
