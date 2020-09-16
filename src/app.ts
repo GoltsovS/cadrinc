@@ -1,6 +1,6 @@
 import express from 'express';
 import { Application } from 'express';
-const { DIST } = require('../vars/paths');
+const { DIST } = require('../vars/paths'); // eslint-disable-line
 
 class App {
   public app: Application;

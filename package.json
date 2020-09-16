@@ -11,6 +11,11 @@
     "client-build": "webpack --config ./src/client/configs/webpack.common.js",
     "client-dev": "webpack-dev-server --open --port 6483 --config ./src/client/configs/webpack.dev.js"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint"
+    }
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/GoltsovS/cadrinc.git"
@@ -45,6 +50,7 @@
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-prettier": "^3.1.4",
     "html-webpack-plugin": "^4.4.1",
+    "husky": "^4.3.0",
     "nodemon": "^2.0.4",
     "prettier": "^2.1.2",
     "react": "^16.13.1",

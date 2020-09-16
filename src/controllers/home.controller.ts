@@ -2,7 +2,7 @@ import * as express from 'express';
 import { Request, Response } from 'express';
 import IControllerBase from '../interfaces/IControllerBase.interface';
 import path from 'path';
-const { DIST } = require('../../vars/paths');
+const { DIST } = require('../../vars/paths'); // eslint-disable-line
 
 class HomeController implements IControllerBase {
   public path = '/';

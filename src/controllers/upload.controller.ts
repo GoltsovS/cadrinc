@@ -4,8 +4,8 @@ import { Request, Response } from 'express';
 import IControllerBase from '../interfaces/IControllerBase.interface';
 import fileConvert from '../middleware/fileConvert';
 import { IValidateFile } from '../interfaces/IUpload.interface';
-const { UPLOADS } = require('../../vars/paths');
-const allowedMimetypes = require('../../vars/mimetypes');
+const { UPLOADS } = require('../../vars/paths'); // eslint-disable-line
+const allowedMimetypes = require('../../vars/mimetypes'); // eslint-disable-line
 
 const storage = multer.diskStorage({
   destination(req: Request, file: Express.Multer.File, callback: (error: Error | null, filename: string) => void) {
