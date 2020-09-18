@@ -2,6 +2,8 @@ import { Component } from 'react';
 import * as React from 'react';
 import axios, { AxiosResponse } from 'axios';
 
+import Button from '../components/button';
+
 class Upload extends Component {
   submitForm(event: any) {
     const formData = new FormData(event.target.closest('form'));
@@ -21,14 +23,14 @@ class Upload extends Component {
       <div>
         <form>
           <input type="file" name="video" />
-          <button
-            onClick={(event: any) => {
+          <Button
+            text="Отправить"
+            type="submit"
+            onClick={(event) => {
               event.preventDefault();
               this.submitForm(event);
             }}
-          >
-            Отправить
-          </button>
+          />
         </form>
       </div>
     );
