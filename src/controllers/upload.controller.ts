@@ -2,7 +2,8 @@ import * as express from 'express';
 import multer from 'multer';
 import { Request, Response } from 'express';
 import IControllerBase from '../interfaces/IControllerBase.interface';
-import fileConvert from '../middleware/fileConvert';
+import FileConvert from '../middleware/fileConvert';
+import promisifyCommand from "../middleware/promisifyFfmpegCommand";
 import { IValidateFile } from '../interfaces/IUpload.interface';
 const { UPLOADS } = require('../../vars/paths'); // eslint-disable-line
 const allowedMimetypes = require('../../vars/mimetypes'); // eslint-disable-line
@@ -15,6 +16,7 @@ const storage = multer.diskStorage({
     callback(null, Date.now() + file.originalname);
   },
 });
+
 const upload = multer({
   storage,
 });
@@ -33,26 +35,67 @@ class UploadController implements IControllerBase {
   }
 
   index = async (req: Request, res: Response) => {
-    const { file } = req;
+    const { file, query } = req;
+    const { convertType } = query;
 
     if (!file) {
       res.send({
-        status: false,
+        success: false,
         error: 'Не удалось загрузить файл',
       });
       return;
     }
 
     const { valid, message } = this.validate(file);
+
     if (!valid) {
-      res.send({ status: false, error: message });
+      res.send({ success: false, error: message });
       return;
     }
 
-    await fileConvert(file.path, file.destination, file.originalname);
-    res.send({
-      status: true,
-    });
+    const fileConvert = new FileConvert(file.path, file.destination, file.originalname);
+
+    if (convertType == 'reverse') {
+      const reverse = promisifyCommand(fileConvert.reverseVideo());
+      reverse
+          .then((data) => {
+            if (data.err) {
+              return data.err;
+            }
+            res.send({ success: true });
+          })
+          .catch((error) => {
+            res.send({ success: false, error });
+          });
+    }
+
+    if (convertType == 'cadring') {
+      const cadring = promisifyCommand(fileConvert.changeFrameRate());
+      cadring
+          .then((data) => {
+            if (data.err) {
+              return data.err;
+            }
+            res.send({ success: true });
+          })
+          .catch((error) => {
+            res.send({ success: false, error });
+          });
+    }
+
+    if (convertType == 'boomerang') {
+      const boomerang = promisifyCommand(fileConvert.boomerang());
+      boomerang
+          .then((data) => {
+            if (data.err) {
+              return data.err;
+            }
+            res.send({ success: true });
+          })
+          .catch((error) => {
+            res.send({ success: false, error });
+          });
+    }
   };
 
   validate = (file: Express.Multer.File): IValidateFile => {
