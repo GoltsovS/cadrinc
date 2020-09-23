@@ -3,7 +3,7 @@ import multer from 'multer';
 import { Request, Response } from 'express';
 import IControllerBase from '../interfaces/IControllerBase.interface';
 import FileConvert from '../middleware/fileConvert';
-import promisifyCommand from "../middleware/promisifyFfmpegCommand";
+import promisifyCommand from '../middleware/promisifyFfmpegCommand';
 import { IValidateFile } from '../interfaces/IUpload.interface';
 const { UPLOADS } = require('../../vars/paths'); // eslint-disable-line
 const allowedMimetypes = require('../../vars/mimetypes'); // eslint-disable-line
@@ -58,43 +58,43 @@ class UploadController implements IControllerBase {
     if (convertType == 'reverse') {
       const reverse = promisifyCommand(fileConvert.reverseVideo());
       reverse
-          .then((data) => {
-            if (data.err) {
-              return data.err;
-            }
-            res.send({ success: true });
-          })
-          .catch((error) => {
-            res.send({ success: false, error });
-          });
+        .then((data) => {
+          if (data.err) {
+            return data.err;
+          }
+          res.send({ success: true });
+        })
+        .catch((error) => {
+          res.send({ success: false, error });
+        });
     }
 
     if (convertType == 'cadring') {
       const cadring = promisifyCommand(fileConvert.changeFrameRate());
       cadring
-          .then((data) => {
-            if (data.err) {
-              return data.err;
-            }
-            res.send({ success: true });
-          })
-          .catch((error) => {
-            res.send({ success: false, error });
-          });
+        .then((data) => {
+          if (data.err) {
+            return data.err;
+          }
+          res.send({ success: true });
+        })
+        .catch((error) => {
+          res.send({ success: false, error });
+        });
     }
 
     if (convertType == 'boomerang') {
       const boomerang = promisifyCommand(fileConvert.boomerang());
       boomerang
-          .then((data) => {
-            if (data.err) {
-              return data.err;
-            }
-            res.send({ success: true });
-          })
-          .catch((error) => {
-            res.send({ success: false, error });
-          });
+        .then((data) => {
+          if (data.err) {
+            return data.err;
+          }
+          res.send({ success: true });
+        })
+        .catch((error) => {
+          res.send({ success: false, error });
+        });
     }
   };
 
