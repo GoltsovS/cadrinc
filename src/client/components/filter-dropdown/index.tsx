@@ -1,6 +1,6 @@
-import * as React from "react";
-import {FC, ReactElement, ReactNode, useState} from "react";
-import Button from "../button";
+import * as React from 'react';
+import { FC, ReactElement, ReactNode, useState } from 'react';
+import Button from '../button';
 import './styles.styl';
 
 export interface FilterDropdownProps {
@@ -13,16 +13,12 @@ const FilterDropdown: FC = (props: FilterDropdownProps): ReactElement => {
 
   const toggleVisible = () => changeVisible(!isOpen);
 
-  const dropdownBody = (
-    <div className='filter-dropdown__container'>
-      {children}
-    </div>
-  );
+  const dropdownBody = <div className="filter-dropdown__container">{children}</div>;
   return (
     <>
       <Button
-        text='Опции'
-        type='button'
+        text="Опции"
+        type="button"
         className={`filter-dropdown__button${isOpen ? ' active' : ''}`}
         onClick={toggleVisible}
       />
