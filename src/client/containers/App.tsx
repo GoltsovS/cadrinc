@@ -4,6 +4,7 @@ import { HashRouter as BaseRouter, Route, Switch } from 'react-router-dom';
 import Editor from './Editor';
 import Upload from './Upload';
 import NavBar from '../components/navbar';
+import Footer from '../components/footer';
 
 class App extends Component {
   render() {
@@ -23,6 +24,7 @@ class App extends Component {
               <Route path="/editor" render={() => <Editor />} />
             </Switch>
           </main>
+          <Footer />
         </Fragment>
       </BaseRouter>
     );

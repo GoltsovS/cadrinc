@@ -18,7 +18,7 @@ const Button: FC<ButtonProps> = (props): ReactElement => {
   };
 
   return (
-    <button className={`button ${className}`} disabled={disabled} onClick={handleClick} type={type}>
+    <button className={`button ${className ? className : ''}`} disabled={disabled} onClick={handleClick} type={type}>
       {text}
     </button>
   );

@@ -1,8 +1,9 @@
 import * as React from 'react';
 import { FC, FormEvent, ReactElement, useState } from 'react';
-import Button from '../button';
 import axios, { AxiosResponse } from 'axios';
 import './styles.styl';
+import FilterCard from "../filter-card";
+import Switch from "../switch";
 
 const UplaodForm: FC = (): ReactElement => {
   const [convertType, setConvertType] = useState<string | null>(null);
@@ -28,33 +29,43 @@ const UplaodForm: FC = (): ReactElement => {
       }}
     >
       <div className="upload-form__row">
-        <input type="file" name="video" />
+        <input className="upload-form__input" type="file" name="video" id='upload-file' />
+        <label className="upload-form__label" htmlFor="upload-file">Выбрать файл</label>
       </div>
-      <div className="upload-form__row upload-form__buttons">
-        <Button
-          text="Кадрировать видео"
-          className="upload-form__button"
-          data-convert-type="cadring"
-          onClick={() => {
-            setConvertType('cadring');
-          }}
+      <FilterCard
+        title='Кадрировать видео'
+        description='Этот фильтр позволяет перевернуть ваше видео задом на перед'
+        buttonText='Загрузить'
+        position='right'
+        className='upload-form__card'
+        onClick={() => {
+          setConvertType('cadring');
+        }}
+      />
+      <FilterCard
+        title='Развернуть видео'
+        description='Этот фильтр позволяет перевернуть ваше видео задом на перед'
+        buttonText='Загрузить'
+        className='upload-form__card'
+        onClick={() => {
+          setConvertType('reverse');
+        }}
+      >
+        <Switch
+          id='cadring-audio-switch'
+          label='Звук'
         />
-        <Button
-          text="Развернуть видео"
-          className="upload-form__button"
-          onClick={() => {
-            setConvertType('reverse');
-          }}
-        />
-        <Button
-          text="Бумеранг"
-          className="upload-form__button"
-          data-convert-type="boomerang"
-          onClick={() => {
-            setConvertType('boomerang');
-          }}
-        />
-      </div>
+      </FilterCard>
+        <FilterCard
+        title='Бумеранг'
+        description='Этот фильтр позволяет перевернуть ваше видео задом на перед'
+        buttonText='Загрузить'
+        position='right'
+        className='upload-form__card'
+        onClick={() => {
+          setConvertType('boomerang');
+        }}
+      />
     </form>
   );
 };
