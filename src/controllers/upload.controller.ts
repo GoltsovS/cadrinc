@@ -5,8 +5,8 @@ import IControllerBase from '../interfaces/IControllerBase.interface';
 import FileConvert from '../middleware/fileConvert';
 import promisifyCommand from '../middleware/promisifyFfmpegCommand';
 import { IValidateFile } from '../interfaces/IUpload.interface';
-import ffprobe from "ffprobe";
-import ffprobeStatic from "ffprobe-static";
+import ffprobe from 'ffprobe';
+import ffprobeStatic from 'ffprobe-static';
 const { UPLOADS } = require('../../vars/paths'); // eslint-disable-line
 const allowedMimetypes = require('../../vars/mimetypes'); // eslint-disable-line
 
@@ -87,7 +87,7 @@ class UploadController implements IControllerBase {
 
     if (convertType == 'boomerang') {
       const duration = await ffprobe(file.path, { path: ffprobeStatic.path })
-        .then(function(info) {
+        .then(function (info) {
           const { streams } = info;
           return streams[0].duration;
         })

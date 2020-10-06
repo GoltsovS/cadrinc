@@ -45,20 +45,8 @@ const UplaodForm: FC = (): ReactElement => {
           setConvertType('cadring');
         }}
       >
-        <Range
-          id="cadring-fps"
-          label="FPS"
-          min={20}
-          max={60}
-          step={1}
-        />
-        <Range
-          id="cadring-pts"
-          label="PTS"
-          min={0.5}
-          max={2}
-          step={0.1}
-        />
+        <Range id="cadring-fps" label="FPS" min={20} max={60} step={1} />
+        <Range id="cadring-pts" label="PTS" min={0.5} max={2} step={0.1} />
       </FilterCard>
       <FilterCard
         title="Развернуть видео"
@@ -81,12 +69,7 @@ const UplaodForm: FC = (): ReactElement => {
           setConvertType('boomerang');
         }}
       >
-        <Range
-          id="boomerang-cicle-count"
-          label="Количество циклов"
-          min={1}
-          max={5}
-        />
+        <Range id="boomerang-cicle-count" label="Количество циклов" min={1} max={5} />
       </FilterCard>
     </form>
   );

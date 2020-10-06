@@ -3,7 +3,7 @@ import ffmpeg, { FfmpegCommand } from 'fluent-ffmpeg';
 export interface IFileConvert {
   changeFrameRate: (fps: number) => FfmpegCommand;
   reverseVideo: (audio: boolean) => FfmpegCommand;
-  boomerang: (params: { loopCount: number, duration: number | undefined }) => FfmpegCommand;
+  boomerang: (params: { loopCount: number; duration: number | undefined }) => FfmpegCommand;
 }
 
 export default class FileConvert implements IFileConvert {
@@ -37,7 +37,7 @@ export default class FileConvert implements IFileConvert {
       .audioFilters(audio ? 'areverse' : '')
       .videoFilter('reverse')
       .output(outputPath);
-  }
+  };
 
   boomerang = ({ loopCount = 1, duration = 0 }) => {
     const outputPath = `${this.outputFilePath}/${new Date()}-${this.originalFilename}`;
@@ -50,5 +50,5 @@ export default class FileConvert implements IFileConvert {
         `[0][r]concat,loop=${loopCount}:${2 * frameRate * duration},setpts=N/${frameRate}/TB`,
       ])
       .output(outputPath);
-  }
+  };
 }

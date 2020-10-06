@@ -1,9 +1,9 @@
-import * as React from "react";
-import {FC, ReactElement} from "react";
+import * as React from 'react';
+import { FC, ReactElement } from 'react';
 import './styles.styl';
 
 export interface RangeProps {
-  id: string,
+  id: string;
   className?: string;
   min: number;
   max: number;
@@ -25,14 +25,7 @@ const Range: FC<RangeProps> = (props): ReactElement => {
     <div className="range">
       <label htmlFor={id}>{label}</label>
       <span>{min}</span>
-      <input
-        type="range"
-        id={id}
-        className={className}
-        min={min}
-        max={max}
-        step={step}
-      />
+      <input type="range" id={id} className={className} min={min} max={max} step={step} />
       <span>{max}</span>
     </div>
   );
