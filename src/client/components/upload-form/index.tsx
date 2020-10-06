@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import './styles.styl';
 import FilterCard from '../filter-card';
 import Switch from '../switch';
+import Range from '../range';
 
 const UplaodForm: FC = (): ReactElement => {
   const [convertType, setConvertType] = useState<string | null>(null);
@@ -43,7 +44,22 @@ const UplaodForm: FC = (): ReactElement => {
         onClick={() => {
           setConvertType('cadring');
         }}
-      />
+      >
+        <Range
+          id="cadring-fps"
+          label="FPS"
+          min={20}
+          max={60}
+          step={1}
+        />
+        <Range
+          id="cadring-pts"
+          label="PTS"
+          min={0.5}
+          max={2}
+          step={0.1}
+        />
+      </FilterCard>
       <FilterCard
         title="Развернуть видео"
         description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
@@ -64,7 +80,14 @@ const UplaodForm: FC = (): ReactElement => {
         onClick={() => {
           setConvertType('boomerang');
         }}
-      />
+      >
+        <Range
+          id="boomerang-cicle-count"
+          label="Количество циклов"
+          min={1}
+          max={5}
+        />
+      </FilterCard>
     </form>
   );
 };
