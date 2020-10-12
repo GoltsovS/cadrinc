@@ -38,7 +38,7 @@ class UploadController implements IControllerBase {
 
   index = async (req: Request, res: Response) => {
     const { file, query } = req;
-    const { convertType } = query;
+    const { convertType, loopCount } = query;
 
     if (!file) {
       res.send({
@@ -72,7 +72,7 @@ class UploadController implements IControllerBase {
     }
 
     if (convertType == 'cadring') {
-      const cadring = promisifyCommand(fileConvert.changeFrameRate());
+      const cadring = promisifyCommand(fileConvert.changeFrameRate(80));
       cadring
         .then((data) => {
           if (data.err) {
@@ -96,7 +96,7 @@ class UploadController implements IControllerBase {
           return undefined;
         });
 
-      const boomerang = promisifyCommand(fileConvert.boomerang({ duration }));
+      const boomerang = promisifyCommand(fileConvert.boomerang({ duration, loopCount: Number(loopCount) }));
       boomerang
         .then((data) => {
           if (data.err) {

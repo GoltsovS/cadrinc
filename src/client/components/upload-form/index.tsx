@@ -8,13 +8,14 @@ import Range from '../range';
 
 const UplaodForm: FC = (): ReactElement => {
   const [convertType, setConvertType] = useState<string | null>(null);
+  const [loopCount, setLoopCount] = useState<number | null>(null);
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.target as HTMLFormElement);
     axios
       .post('/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        params: { convertType },
+        params: { convertType, loopCount },
       })
       .then((data: AxiosResponse) => {
         console.log(data);
@@ -69,7 +70,17 @@ const UplaodForm: FC = (): ReactElement => {
           setConvertType('boomerang');
         }}
       >
-        <Range id="boomerang-cicle-count" label="Количество циклов" min={1} max={5} />
+        <Range
+          id="boomerang-cicle-count"
+          label="Количество циклов"
+          min={1}
+          max={5}
+          val={2}
+          onChange={(event) => {
+            const value = Number(event.target.value);
+            setLoopCount(value);
+          }}
+        />
       </FilterCard>
     </form>
   );
