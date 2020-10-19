@@ -38,7 +38,7 @@ class UploadController implements IControllerBase {
 
   index = async (req: Request, res: Response) => {
     const { file, query } = req;
-    const { convertType, loopCount } = query;
+    const { convertType, loopCount, sound } = query;
 
     if (!file) {
       res.send({
@@ -58,7 +58,7 @@ class UploadController implements IControllerBase {
     const fileConvert = new FileConvert(file.path, file.destination, file.originalname);
 
     if (convertType == 'reverse') {
-      const reverse = promisifyCommand(fileConvert.reverseVideo());
+      const reverse = promisifyCommand(fileConvert.reverseVideo(Boolean(sound)));
       reverse
         .then((data) => {
           if (data.err) {

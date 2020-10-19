@@ -9,13 +9,14 @@ import Range from '../range';
 const UplaodForm: FC = (): ReactElement => {
   const [convertType, setConvertType] = useState<string | null>(null);
   const [loopCount, setLoopCount] = useState<number | null>(null);
+  const [sound, toggleSound] = useState<boolean | null>(null);
 
   const submitForm = (event: FormEvent<HTMLFormElement>) => {
     const formData = new FormData(event.target as HTMLFormElement);
     axios
       .post('/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        params: { convertType, loopCount },
+        params: { convertType, loopCount, sound },
       })
       .then((data: AxiosResponse) => {
         console.log(data);
@@ -58,7 +59,14 @@ const UplaodForm: FC = (): ReactElement => {
           setConvertType('reverse');
         }}
       >
-        <Switch id="cadring-audio-switch" label="Звук" />
+        <Switch
+          id="cadring-audio-switch"
+          label="Звук"
+          onChange={(event) => {
+            const isChecked = event.target.checked;
+            toggleSound(isChecked);
+          }}
+        />
       </FilterCard>
       <FilterCard
         title="Бумеранг"
