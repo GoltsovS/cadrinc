@@ -1,3 +1,3 @@
 module.exports = {
-    '**/*.ts?(x)': () => 'eslint --fix && git add'
+    '**/*.ts?(x)': () => ['eslint --fix', ' git add'],
 }
