@@ -19,10 +19,12 @@ class App extends Component {
             ]}
           />
           <main>
-            <Switch>
-              <Route path="/upload" render={() => <Upload />} />
-              <Route path="/editor" render={() => <Editor />} />
-            </Switch>
+            <div className='width-container'>
+              <Switch>
+                <Route path="/upload" render={() => <Upload />} />
+                <Route path="/editor" render={() => <Editor />} />
+              </Switch>
+            </div>
           </main>
           <Footer />
         </Fragment>
