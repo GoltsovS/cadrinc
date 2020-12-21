@@ -1,8 +1,8 @@
 import { Component, Fragment } from 'react';
 import * as React from 'react';
 import { HashRouter as BaseRouter, Route, Switch } from 'react-router-dom';
-import Editor from './Editor';
-import Upload from './Upload';
+import UploadPicture from './UploadPicture';
+import UploadVideo from './UploadVideo';
 import NavBar from '../components/navbar';
 import Footer from '../components/footer';
 
@@ -14,15 +14,15 @@ class App extends Component {
           <NavBar
             navItems={[
               { to: '/home', name: 'Главная' },
-              { to: '/upload', name: 'Загрузить' },
-              { to: '/editor', name: 'Редактор' },
+              { to: '/upload-video', name: 'Загрузить видео' },
+              { to: '/upload-picture', name: 'Загрузить изображение' },
             ]}
           />
           <main>
             <div className='width-container'>
               <Switch>
-                <Route path="/upload" render={() => <Upload />} />
-                <Route path="/editor" render={() => <Editor />} />
+                <Route path="/upload-video" render={() => <UploadVideo />} />
+                <Route path="/upload-picture" render={() => <UploadPicture />} />
               </Switch>
             </div>
           </main>

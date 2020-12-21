@@ -3,7 +3,7 @@ import * as React from 'react';
 
 import UploadForm from '../components/upload-form';
 
-class Upload extends Component {
+class UploadVideo extends Component {
   render() {
     return (
       <>
@@ -13,4 +13,4 @@ class Upload extends Component {
   }
 }
 
-export default Upload;
+export default UploadVideo;

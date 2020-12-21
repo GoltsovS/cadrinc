@@ -6,7 +6,7 @@ import FilterCard from '../filter-card';
 import Switch from '../switch';
 import Range from '../range';
 
-const UplaodForm: FC = (): ReactElement => {
+const UploadForm: FC = (): ReactElement => {
   const [convertType, setConvertType] = useState<string | null>(null);
   const [loopCount, setLoopCount] = useState<number | null>(null);
   const [sound, toggleSound] = useState<boolean | null>(null);
@@ -94,4 +94,4 @@ const UplaodForm: FC = (): ReactElement => {
   );
 };
 
-export default UplaodForm;
+export default UploadForm;

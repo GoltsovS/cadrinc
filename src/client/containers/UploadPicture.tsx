@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import * as React from 'react';
 
-class Editor extends Component {
+class UploadPicture extends Component {
   render() {
     return (
       <div>
@@ -11,4 +11,4 @@ class Editor extends Component {
   }
 }
 
-export default Editor;
+export default UploadPicture;
