@@ -8,7 +8,7 @@ const Header: FC = (): ReactElement => {
   return (
     <header className="header">
       <div className="header__container width-container">
-        <Logo width="180px" height="50px" />
+        <Logo />
         <NavBar
           navItems={[
             { to: '/home', name: 'Главная' },
