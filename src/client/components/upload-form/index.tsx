@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FC, FormEvent, ReactElement, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import './styles.styl';
 import FilterCard from '../filter-card';
@@ -7,16 +7,18 @@ import Switch from '../switch';
 import Range from '../range';
 
 const UploadForm: FC = (): ReactElement => {
-  const [convertType, setConvertType] = useState<string | null>(null);
   const [loopCount, setLoopCount] = useState<number | null>(null);
   const [sound, toggleSound] = useState<boolean | null>(null);
 
-  const submitForm = (event: FormEvent<HTMLFormElement>) => {
-    const formData = new FormData(event.target as HTMLFormElement);
+  const handleChangeInputFile = (event: ChangeEvent) => {
+    const { name, files } = event.target as HTMLInputElement;
+    const [file] = files as FileList;
+    const formData = new FormData();
+    formData.append('video', file);
     axios
       .post('/upload', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        params: { convertType, loopCount, sound },
+        params: { convertType: name, loopCount, sound },
       })
       .then((data: AxiosResponse) => {
         console.log(data);
@@ -24,28 +26,15 @@ const UploadForm: FC = (): ReactElement => {
   };
 
   return (
-    <form
-      className="upload-form"
-      onSubmit={(event) => {
-        event.preventDefault();
-        submitForm(event);
-      }}
-    >
-      <div className="upload-form__row">
-        <input className="upload-form__input" type="file" name="video" id="upload-file" />
-        <label className="upload-form__label" htmlFor="upload-file">
-          Выбрать файл
-        </label>
-      </div>
+    <form className="upload-form">
       <FilterCard
         title="Кадрировать видео"
         description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
         buttonText="Загрузить"
+        name="cadring"
         position="right"
         className="upload-form__card"
-        onClick={() => {
-          setConvertType('cadring');
-        }}
+        onChange={handleChangeInputFile}
       >
         <Range id="cadring-fps" label="FPS" min={20} max={60} step={1} />
         <Range id="cadring-pts" label="PTS" min={0.5} max={2} step={0.1} />
@@ -54,10 +43,9 @@ const UploadForm: FC = (): ReactElement => {
         title="Развернуть видео"
         description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
         buttonText="Загрузить"
+        name="reverse"
         className="upload-form__card"
-        onClick={() => {
-          setConvertType('reverse');
-        }}
+        onChange={handleChangeInputFile}
       >
         <Switch
           id="cadring-audio-switch"
@@ -72,11 +60,10 @@ const UploadForm: FC = (): ReactElement => {
         title="Бумеранг"
         description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
         buttonText="Загрузить"
+        name="boomerang"
         position="right"
         className="upload-form__card"
-        onClick={() => {
-          setConvertType('boomerang');
-        }}
+        onChange={handleChangeInputFile}
       >
         <Range
           id="boomerang-cicle-count"

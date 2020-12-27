@@ -11,7 +11,7 @@ const Footer: FC = (): ReactElement => {
           <span className="footer__copyright">Все права защищены © 2020 CadrInc</span>
         </section>
         <section className="footer__col">
-          <Logo width='90px' height='20px'/>
+          <Logo width="90px" height="20px" />
         </section>
       </div>
     </footer>
