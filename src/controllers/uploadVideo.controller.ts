@@ -7,6 +7,7 @@ import promisifyCommand from '../middleware/promisifyFfmpegCommand';
 import { IValidateFile } from '../interfaces/IUpload.interface';
 import ffprobe from 'ffprobe';
 import ffprobeStatic from 'ffprobe-static';
+import { uploadVideoPath } from '../api.routes';
 const { UPLOADS } = require('../../vars/paths'); // eslint-disable-line
 const allowedMimetypes = require('../../vars/mimetypes'); // eslint-disable-line
 
@@ -23,8 +24,8 @@ const upload = multer({
   storage,
 });
 
-class UploadController implements IControllerBase {
-  public path = '/upload';
+class UploadVideoController implements IControllerBase {
+  public path = uploadVideoPath;
 
   public router = express.Router();
 
@@ -129,4 +130,4 @@ class UploadController implements IControllerBase {
   };
 }
 
-export default UploadController;
+export default UploadVideoController;

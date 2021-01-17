@@ -1,7 +1,9 @@
 import * as React from 'react';
-import { ChangeEvent, FC, ReactElement, useState, useEffect } from 'react';
+import { ChangeEvent, FC, ReactElement, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import '../components/upload-form/styles.styl';
+import { uploadVideoPath } from "../../api.routes";
+
 import FilterCard from '../components/filter-card';
 import Switch from '../components/switch';
 import Range from '../components/range';
@@ -16,7 +18,7 @@ const UploadVideo: FC = (): ReactElement => {
     const formData = new FormData();
     formData.append('video', file);
     axios
-      .post('/upload', formData, {
+      .post(uploadVideoPath, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
         params: { convertType: name, loopCount, sound },
       })

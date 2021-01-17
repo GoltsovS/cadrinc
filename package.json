@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet --fix",
-    "server-build": "tsc --project .",
-    "server-dev": "nodemon src/index.ts",
-    "client-build": "webpack --config ./src/client/configs/webpack.common.js",
-    "client-dev": "webpack-dev-server --open --port 6483 --config ./src/client/configs/webpack.dev.js"
+    "server-build": "tsc -r dotenv/config --project .",
+    "server-dev": "nodemon -r dotenv/config src/index.ts",
+    "client-build": "webpack -r dotenv/config --config ./src/client/configs/webpack.common.js",
+    "client-dev": "webpack-dev-server -r dotenv/config --open --port 6483 --config ./src/client/configs/webpack.dev.js"
   },
   "husky": {
     "hooks": {
@@ -27,10 +27,12 @@
   "author": "GoltsovSM",
   "license": "ISC",
   "dependencies": {
+    "@types/dotenv": "^8.2.0",
     "@types/ffprobe": "^1.1.0",
     "@types/ffprobe-static": "^2.0.0",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
+    "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "ffprobe": "^1.1.2",
     "ffprobe-static": "^3.0.0",
