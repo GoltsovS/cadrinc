@@ -7,13 +7,14 @@ class App {
 
   public port: number;
 
-  constructor(appInit: { middlewares: any; port: number; controllers: any }) {
+  constructor(appInit: { middlewares: any; port: number; controllers: any; databaseConnect: any }) {
     this.app = express();
     this.port = appInit.port;
 
     this.middlewares(appInit.middlewares);
     this.routes(appInit.controllers);
     this.assets();
+    this.dbConnect(appInit.databaseConnect);
   }
 
   private routes(controllers: { forEach: (arg0: (controller: any) => void) => void }) {
@@ -30,6 +31,10 @@ class App {
     middleWares.forEach((middleWare) => {
       this.app.use(middleWare);
     });
+  }
+
+  private dbConnect(callback: () => void) {
+    callback();
   }
 
   public listen() {
