@@ -1,16 +1,25 @@
 import * as React from 'react';
-import { ChangeEvent, FC, ReactElement, useState } from 'react';
+import { ChangeEvent, FC, ReactElement, useEffect, useState } from 'react';
 import axios, { AxiosResponse } from 'axios';
 import '../components/upload-form/styles.styl';
-import { uploadVideoPath } from "../../api.routes";
+import { videoCards, uploadVideoPath } from '../../api.routes';
+import { ICard } from '../../database/interfaces/cards';
 
 import FilterCard from '../components/filter-card';
-import Switch from '../components/switch';
-import Range from '../components/range';
 
 const UploadVideo: FC = (): ReactElement => {
-  const [loopCount, setLoopCount] = useState<number | null>(null);
-  const [sound, toggleSound] = useState<boolean | null>(null);
+  const [cardList, setCardList] = useState<Array<ICard>>([]);
+
+  useEffect(() => {
+    axios
+      .get(videoCards)
+      .then(({ data }) => {
+        setCardList(data.cardList);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
 
   const handleChangeInputFile = (event: ChangeEvent) => {
     const { name, files } = event.target as HTMLInputElement;
@@ -20,7 +29,7 @@ const UploadVideo: FC = (): ReactElement => {
     axios
       .post(uploadVideoPath, formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
-        params: { convertType: name, loopCount, sound },
+        params: { convertType: name },
       })
       .then((data: AxiosResponse) => {
         console.log(data);
@@ -29,56 +38,17 @@ const UploadVideo: FC = (): ReactElement => {
 
   return (
     <form className="upload-form">
-      <FilterCard
-        title="Кадрировать видео"
-        description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
-        buttonText="Загрузить"
-        name="cadring"
-        position="right"
-        className="upload-form__card"
-        onChange={handleChangeInputFile}
-      >
-        <Range id="cadring-fps" label="FPS" min={20} max={60} step={1} />
-        <Range id="cadring-pts" label="PTS" min={0.5} max={2} step={0.1} />
-      </FilterCard>
-      <FilterCard
-        title="Развернуть видео"
-        description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
-        buttonText="Загрузить"
-        name="reverse"
-        className="upload-form__card"
-        onChange={handleChangeInputFile}
-      >
-        <Switch
-          id="cadring-audio-switch"
-          label="Звук"
-          onChange={(event) => {
-            const isChecked = event.target.checked;
-            toggleSound(isChecked);
-          }}
+      {cardList.map(({ title, description, name }, index) => (
+        <FilterCard
+          key={name}
+          title={title}
+          name={name}
+          description={description}
+          buttonText="Загрузить"
+          position={index % 2 === 0 ? 'right' : 'left'}
+          onChange={handleChangeInputFile}
         />
-      </FilterCard>
-      <FilterCard
-        title="Бумеранг"
-        description="Этот фильтр позволяет перевернуть ваше видео задом на перед"
-        buttonText="Загрузить"
-        name="boomerang"
-        position="right"
-        className="upload-form__card"
-        onChange={handleChangeInputFile}
-      >
-        <Range
-          id="boomerang-cicle-count"
-          label="Количество циклов"
-          min={1}
-          max={5}
-          val={2}
-          onChange={(event) => {
-            const value = Number(event.target.value);
-            setLoopCount(value);
-          }}
-        />
-      </FilterCard>
+      ))}
     </form>
   );
 };

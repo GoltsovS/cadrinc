@@ -1,6 +1,6 @@
 import { Component, Fragment } from 'react';
 import * as React from 'react';
-import { HashRouter as BaseRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as BaseRouter, Route, Switch } from 'react-router-dom';
 import UploadPicture from './UploadPicture';
 import UploadVideo from './UploadVideo';
 import Header from '../components/header';
