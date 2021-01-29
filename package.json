@@ -8,8 +8,8 @@
     "lint": "eslint 'src/**/*.{ts,tsx}' --quiet --fix",
     "server-build": "tsc -r dotenv/config --project .",
     "server-dev": "nodemon -r dotenv/config src/index.ts",
-    "client-build": "webpack -r dotenv/config --config ./src/client/configs/webpack.common.js",
-    "client-dev": "webpack-dev-server -r dotenv/config --open --port 6483 --config ./src/client/configs/webpack.dev.js"
+    "client-build": "webpack -r dotenv/config --config ./src/client/configs/webpack.prod.js",
+    "client-dev": "webpack-dev-server -r dotenv/config --open --port 6483 --hot --history-api-fallback --config ./src/client/configs/webpack.dev.js"
   },
   "husky": {
     "hooks": {
@@ -68,6 +68,7 @@
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-hot-loader": "^4.13.0",
     "react-router-dom": "^5.2.0",
     "style-loader": "^1.2.1",
     "stylus": "^0.54.8",

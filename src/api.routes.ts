@@ -1,8 +1,10 @@
-export const uploadVideo: string = 'uploadVideo';
-export const uploadPicture: string = 'uploadPicture';
+const api = 'api';
 
-export const uploadVideoPath: string = `/${uploadVideo}`;
-export const uploadPicturePath: string = `/${uploadPicture}`;
+export const uploadVideo = 'uploadVideo';
+export const uploadPicture = 'uploadPicture';
 
-export const videoCards: string = `/cards/video`;
-export const pictureCards: string = `/cards/picture`;
+export const uploadVideoPath = `${api}/${uploadVideo}`;
+export const uploadPicturePath = `${api}/${uploadPicture}`;
+
+export const videoCards = `${api}/cards/video`;
+export const pictureCards = `${api}/cards/picture`;
