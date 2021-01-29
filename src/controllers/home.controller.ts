@@ -5,7 +5,7 @@ import path from 'path';
 const { DIST } = require('../../vars/paths'); // eslint-disable-line
 
 class HomeController implements IControllerBase {
-  public path = '/';
+  public path = '*';
 
   public router = express.Router();
 

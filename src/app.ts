@@ -12,8 +12,8 @@ class App {
     this.port = appInit.port;
 
     this.middlewares(appInit.middlewares);
-    this.routes(appInit.controllers);
     this.assets();
+    this.routes(appInit.controllers);
     this.dbConnect(appInit.databaseConnect);
   }
 
